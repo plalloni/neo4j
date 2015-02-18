@@ -25,10 +25,10 @@ import org.neo4j.cypher.internal.compiler.v2_1.ast.Expression.SemanticContext
 
 class OctalIntegerLiteralTest extends CypherFunSuite {
   test("correctly parses octal numbers") {
-    assert(SignedOctalIntegerLiteral("022")(DummyPosition(0)).value === 022)
-    assert(SignedOctalIntegerLiteral("00")(DummyPosition(0)).value === 00)
-    assert(SignedOctalIntegerLiteral("0734")(DummyPosition(0)).value === 0734)
-    assert(SignedOctalIntegerLiteral("0034")(DummyPosition(0)).value === 0034)
+    assert(SignedOctalIntegerLiteral("022")(DummyPosition(0)).value === BigInt("22", 8).toInt)
+    assert(SignedOctalIntegerLiteral("00")(DummyPosition(0)).value === 0)
+    assert(SignedOctalIntegerLiteral("0734")(DummyPosition(0)).value === BigInt("734", 8).toInt)
+    assert(SignedOctalIntegerLiteral("0034")(DummyPosition(0)).value === BigInt("34", 8).toInt)
   }
 
   test("throws error for invalid octal numbers") {
